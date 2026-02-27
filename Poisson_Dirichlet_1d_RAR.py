@@ -25,7 +25,7 @@ bc = pinnx.icbc.DirichletBC(func)
 
 # 2. Initial data setup: intentionally use fewer domain points (16)
 data = pinnx.problem.PDE(
-    geom, pde, bc, net, num_domain=16, num_boundary=2, solution=func, num_test=100
+    geom, pde, bc, net, num_domain=16, num_boundary=2, solution=func, num_test=1000
 )
 
 # 3. Initial training
