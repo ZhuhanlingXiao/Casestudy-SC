@@ -25,10 +25,10 @@ net = pinnx.nn.Model(
 
 # Residual（Bernoulli: y' + t*y - t*y^3 = 0）
 def ode(x, y):
-    # dy/dt 从近似网络得到
+    # dy/dt
     dy_dt = net.jacobian(x)['y']['t']
     y_val = net(x)['y']
-    # 残差：dy_dt + t*y - t*y^3
+    # Residual：dy_dt + t*y - t*y^3
     return dy_dt + x['t'] * y_val - x['t'] * (y_val ** 3)
 
 
@@ -42,11 +42,11 @@ data = pinnx.problem.TimePDE(
     ode,
     [ic],
     approximator=net,
-    num_domain=128,    # 域内采样点，适当增大提升拟合精度
+    num_domain=128,    # residual point taken in the domain
     num_boundary=4,
     solution=func,
     num_test=1000,
-    # 必须给两个权重：[PDE_weight, IC+BC_weight]
+    # give two weights：[PDE_weight, IC+BC_weight]
     loss_weights=[1.0, 1.0],
 )
 
