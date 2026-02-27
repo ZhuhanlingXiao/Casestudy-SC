@@ -25,7 +25,7 @@ net = pinnx.nn.Model(
 geom = pinnx.geometry.Interval(-1, 1).to_dict_point('x')
 bc = pinnx.icbc.DirichletBC(func)
 data = pinnx.problem.PDE(
-    geom, pde, [], net, num_domain=16, num_boundary=2, solution=func, num_test=100
+    geom, pde, [], net, num_domain=16, num_boundary=2, solution=func, num_test=1000
 )
 
 trainer = pinnx.Trainer(data)
